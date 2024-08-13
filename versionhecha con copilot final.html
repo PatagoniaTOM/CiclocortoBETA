@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Funcionalidades</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #006400, #003300);
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            padding: 20px;
+        }
+        .logo {
+            background-color: white;
+            padding: 20px;
+        }
+        .countdown {
+            margin: 20px 0;
+        }
+        .note-section {
+            margin: 20px 0;
+        }
+        .note-section textarea {
+            width: 80%;
+            height: 100px;
+        }
+        .whatsapp-button {
+            margin: 20px 0;
+        }
+        .footer {
+            margin-top: 20px;
+            color: white;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Esta es una prueba para explorar funcionalidades y herramientas digital para el apoyo de la producción</h1>
+    </div>
+    <div class="logo">
+        <img src="https://empresasiansa.cl/patagoniafresh/wp-content/uploads/sites/6/2020/03/logo-patagoniafresh.svg" alt="Logo Patagonia Fresh">
+    </div>
+    <div class="countdown">
+        <h2>Tiempo para trasplante T24-25</h2>
+        <div id="countdown"></div>
+    </div>
+    <div class="note-section">
+        <h2>¿Desea agregar una nota?</h2>
+        <textarea maxlength="100"></textarea>
+    </div>
+    <div class="whatsapp-button">
+        <button onclick="shareViaWhatsApp()">Compartir este mensaje via WhatsApp</button>
+    </div>
+    <div class="footer">
+        <p>Creado por Christian Stange Marcus | Agrónomo Desarrollo<br>
+        Panamericana Sur 2013, San Fernando. O’Higgins<br>
+        Cel: +56 9 9002 7631<br>
+        <a href="mailto:christian.stange@patagoniafresh.cl">christian.stange@patagoniafresh.cl</a></p>
+        <p>Visitas al sitio: <span id="visit-count">0</span></p>
+        <p>Creado con AI</p>
+    </div>
+
+    <script>
+        // Countdown Timer
+        function countdown() {
+            const targetDate = new Date("2024-09-23T00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "EXPIRED";
+            }
+        }
+        setInterval(countdown, 1000);
+
+        // WhatsApp Share
+        function shareViaWhatsApp() {
+            const message = "Esta es una prueba para explorar funcionalidades y herramientas digital para el apoyo de la producción";
+            const url = "https://wa.me/?text=" + encodeURIComponent(message);
+            window.open(url, "_blank");
+        }
+
+        // Visit Counter
+        let visitCount = localStorage.getItem('visitCount') || 0;
+        visitCount++;
+        localStorage.setItem('visitCount', visitCount);
+        document.getElementById('visit-count').innerText = visitCount;
+    </script>
+</body>
+</html>
