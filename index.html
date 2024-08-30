@@ -3,104 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prueba de Funcionalidades</title>
+    <title>Ensayo de Jardín de Variedades</title>
     <style>
         body {
-            background: linear-gradient(to bottom, #006400, #003300);
+            font-family: Arial, sans-serif;
+            background-color: #2E8B57;
             color: white;
             text-align: center;
-            font-family: Arial, sans-serif;
         }
-        .header {
+        .content {
+            background-color: #2E8B57;
             padding: 20px;
         }
         .logo {
             background-color: white;
             padding: 20px;
         }
-        .countdown {
-            margin: 20px 0;
+        .logo img {
+            max-width: 100%;
         }
         .note-section {
+            background-color: white;
+            color: black;
+            padding: 20px;
             margin: 20px 0;
         }
         .note-section textarea {
-            width: 80%;
+            width: 100%;
             height: 100px;
         }
-        .whatsapp-button {
-            margin: 20px 0;
+        .note-section .word-count {
+            text-align: right;
+        }
+        .button {
+            background-color: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .email-button {
+            background-color: #0072C6;
         }
         .footer {
             margin-top: 20px;
-            color: white;
         }
-        .footer a {
-            color: white;
-            text-decoration: none;
+        .separator {
+            border-top: 2px solid white;
+            margin: 20px 0;
+        }
+        .countdown {
+            color: orange;
+            font-weight: bold;
         }
     </style>
-</head>
-<body>
-    <div class="header">
-        <h1>Esta es una prueba para explorar funcionalidades y herramientas digital para el apoyo de la producción</h1>
-    </div>
-    <div class="logo">
-        <img src="https://empresasiansa.cl/patagoniafresh/wp-content/uploads/sites/6/2020/03/logo-patagoniafresh.svg" alt="Logo Patagonia Fresh">
-    </div>
-    <div class="countdown">
-        <h2>Tiempo para trasplante T24-25</h2>
-        <div id="countdown"></div>
-    </div>
-    <div class="note-section">
-        <h2>¿Desea agregar una nota?</h2>
-        <textarea maxlength="100"></textarea>
-    </div>
-    <div class="whatsapp-button">
-        <button onclick="shareViaWhatsApp()">Compartir este mensaje via WhatsApp</button>
-    </div>
-    <div class="footer">
-        <p>Creado por Christian Stange Marcus | Agrónomo Desarrollo<br>
-        Panamericana Sur 2013, San Fernando. O’Higgins<br>
-        Cel: +56 9 9002 7631<br>
-        <a href="mailto:christian.stange@patagoniafresh.cl">christian.stange@patagoniafresh.cl</a></p>
-        <p>Visitas al sitio: <span id="visit-count">0</span></p>
-        <p>Creado con AI</p>
-    </div>
-
     <script>
-        // Countdown Timer
-        function countdown() {
-            const targetDate = new Date("2024-09-23T00:00:00").getTime();
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
-            + minutes + "m " + seconds + "s ";
-
-            if (distance < 0) {
-                document.getElementById("countdown").innerHTML = "EXPIRED";
+        function checkPassword() {
+            const password = prompt("Ingrese la contraseña:");
+            if (password === "pppp") {
+                document.getElementById('main-content').style.display = 'block';
+            } else {
+                alert("Contraseña incorrecta");
             }
         }
-        setInterval(countdown, 1000);
 
-        // WhatsApp Share
-        function shareViaWhatsApp() {
-            const message = "Esta es una prueba para explorar funcionalidades y herramientas digital para el apoyo de la producción";
-            const url = "https://wa.me/?text=" + encodeURIComponent(message);
-            window.open(url, "_blank");
+        function updateCountdown() {
+            const transplantDate = new Date('2024-10-07');
+            const today = new Date();
+            const timeDiff = transplantDate - today;
+            const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            document.getElementById('countdown').innerText = daysLeft;
+
+            const transplantDatePast = new Date('2023-10-07');
+            const daysSinceTransplant = Math.ceil((today - transplantDatePast) / (1000 * 60 * 60 * 24));
+            document.getElementById('days-since-transplant').innerText = daysSinceTransplant;
+
+            const harvestDate = new Date('2025-03-23');
+            const totalDays = Math.ceil((harvestDate - transplantDatePast) / (1000 * 60 * 60 * 24));
+            const progress = ((daysSinceTransplant / totalDays) * 100).toFixed(2);
+            document.getElementById('progress').innerText = progress + '%';
+
+            const weekNumber = Math.ceil((today - new Date(today.getFullYear(), 0, 1)) / (1000 * 60 * 60 * 24 * 7));
+            document.getElementById('week-number').innerText = weekNumber;
         }
 
-        // Visit Counter
-        let visitCount = localStorage.getItem('visitCount') || 0;
-        visitCount++;
-        localStorage.setItem('visitCount', visitCount);
-        document.getElementById('visit-count').innerText = visitCount;
+        function updateWordCount(textarea, countDisplay) {
+            const maxWords = 200;
+            const words = textarea.value.split(/\s+/).filter(word => word.length > 0);
+            const wordsLeft = maxWords - words.length;
+            countDisplay.innerText = `Palabras restantes: ${wordsLeft}`;
+        }
+
+        function shareViaWhatsApp() {
+            const text = document.body.innerText;
+            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        function shareViaEmail() {
+            const text = document.body.innerText;
+            const mailto = `mailto:?subject=Información de Ensayo&body=${encodeURIComponent(text)}`;
+            window.open(mailto, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkPassword();
+            updateCountdown();
+        });
     </script>
+</head>
+<body>
+    <div id="main-content" style="display:none;">
+        <div class="content">
+            <h1>Información de ensayo de Jardín de Variedades Ciclo Corto 2024-2025</h1>
+            <div class="logo">
+                <img src="https://empresasiansa.cl/patagoniafresh/wp-content/uploads/sites/6/2020/03/logo-patagoniafresh.svg" alt="Logo Patagonia Fresh">
+            </div>
+            <h2>Tiempo en dias para trasplante ensayo ciclo corto T24-25</h2>
+            <p class="countdown" id="countdown"></p>
+            <div class="separator"></div>
+            <p>Número de semana actual: <strong id="week-number"></strong></p>
+            <p>Fecha de trasplante: 07-10-2023</p>
+            <p>Días desde el trasplante: <strong id="days-since-transplant"></strong></p>
+            <p>Porcentaje de avance de desarrollo del cultivo: <strong id="progress"></strong></p>
+            <p>La Variedad en este ensayo son</p>
+            <p><strong>H2123 ciclo early ; Juice Bost.12.4</strong></p>
+            <p><strong>SVTM9033 primera vez en Chile</strong></p>
+            <p><strong>SVTM9018 (lo compra AGROZZI también)</strong></p>
+            <p><strong>NUN296 probada 2023-24</strong></p>
+            <div class="note-section">
+                <h3>Desea agregar una nota general</h3>
+                <textarea oninput="updateWordCount(this, document.getElementById('word-count'))"></textarea>
+                <div class="word-count" id="word-count">Palabras restantes: 200</div>
+            </div>
+            <button class="button" onclick="shareViaWhatsApp()">Compartir vía WhatsApp</button>
+            <button class="button email-button" onclick="shareViaEmail()">Compartir vía Email</button>
+            <div class="footer">
+                <p>Creado por Christian Stange Marcus | Agrónomo Desarrollo</p>
+                <p>Panamericana Sur 2013, San Fernando. O’Higgins</p>
+                <p>Cel: +56 9 9002 7631</p>
+                <p><a href="mailto:christian.stange@patagoniafresh.cl" style="color: white;">christian.stange@patagoniafresh.cl</a></p>
+                <p>Visitas al sitio: <span id="visit-count">0</span></p>
+                <p>Creado con AI</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
