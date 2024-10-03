@@ -69,17 +69,17 @@
         }
 
         function updateCountdown() {
-            const transplantDate = new Date('2024-10-07');
+            const transplantDate = new Date('2024-10-03');
             const today = new Date();
             const timeDiff = transplantDate - today;
             const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
             document.getElementById('countdown').innerText = daysLeft;
 
-            const transplantDatePast = new Date('2023-10-07');
+            const transplantDatePast = new Date('2024-10-03');
             const daysSinceTransplant = Math.ceil((today - transplantDatePast) / (1000 * 60 * 60 * 24));
             document.getElementById('days-since-transplant').innerText = daysSinceTransplant;
 
-            const harvestDate = new Date('2025-03-23');
+            const harvestDate = new Date('2025-02-05');
             const totalDays = Math.ceil((harvestDate - transplantDatePast) / (1000 * 60 * 60 * 24));
             const progress = ((daysSinceTransplant / totalDays) * 100).toFixed(2);
             document.getElementById('progress').innerText = progress + '%';
@@ -117,20 +117,23 @@
     <div id="main-content" style="display:none;">
         <div class="content">
             <h1>Información de ensayo de Jardín de Variedades Ciclo Corto 2024-2025</h1>
+            <h1>Agricultore Victor Torres</h1>
             <div class="logo">
                 <img src="https://empresasiansa.cl/patagoniafresh/wp-content/uploads/sites/6/2020/03/logo-patagoniafresh.svg" alt="Logo Patagonia Fresh">
             </div>
-            <h2>Tiempo en dias para trasplante ensayo ciclo corto T24-25</h2>
+            <h2>Tiempo en dias para Cosecha ensayo ciclo corto T24-25</h2>
             <h1><p class="countdown" id="countdown"></p></h1>
             <div class="separator"></div>
             <h2>Número de semana actual: <strong id="week-number"></strong></h2>
-            <p>Fecha de trasplante: 07-10-2023</p>
+            <p>Fecha de trasplante: 03-10-2024</p>
             <div class="separator"></div>
             <h2>Días desde el trasplante: <strong id="days-since-transplant"></strong></h2>
             <p>Porcentaje de avance de desarrollo del cultivo acorde al ciclo teórico: <strong id="progress"></strong></p>
             <div class="separator"></div>
-            <h2>Las Variedades de este ensayo son</h2>
+            <h2>Las Variedades de este ensayo son (de Sur a Norte)</h2>
             <p><strong>H2123 ciclo early ; Juice Bost.12.4</strong></p>
+            <p><strong>SVTM9027 probada el 23-24 </strong></p>
+            <p><strong>SVTM9032 probada el 23-24 </strong></p>
             <p><strong>SVTM9033 primera vez en Chile</strong></p>
             <p><strong>SVTM9018 (lo compra AGROZZI también)</strong></p>
             <p><strong>NUN296 probada 2023-24</strong></p>
