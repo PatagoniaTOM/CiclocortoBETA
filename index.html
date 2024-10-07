@@ -69,7 +69,7 @@
         }
 
         function updateCountdown() {
-            const transplantDate = new Date('2025-02-05');
+            const transplantDate = new Date('2025-02-08');
             const today = new Date();
             const timeDiff = transplantDate - today;
             const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
@@ -79,7 +79,7 @@
             const daysSinceTransplant = Math.ceil((today - transplantDatePast) / (1000 * 60 * 60 * 24));
             document.getElementById('days-since-transplant').innerText = daysSinceTransplant;
 
-            const harvestDate = new Date('2025-02-05');
+            const harvestDate = new Date('2025-02-08');
             const totalDays = Math.ceil((harvestDate - transplantDatePast) / (1000 * 60 * 60 * 24));
             const progress = ((daysSinceTransplant / totalDays) * 100).toFixed(2);
             document.getElementById('progress').innerText = progress + '%';
